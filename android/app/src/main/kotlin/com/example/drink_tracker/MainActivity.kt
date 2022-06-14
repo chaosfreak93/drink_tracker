@@ -1,4 +1,4 @@
-package com.example.drink_tracker
+package de.beyonddark.drink_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 

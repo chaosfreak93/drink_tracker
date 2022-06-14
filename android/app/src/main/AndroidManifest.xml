@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.drink_tracker">
+    package="de.beyonddark.drink_tracker">
    <application
-        android:label="drink_tracker"
+        android:label="Drink Tracker"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

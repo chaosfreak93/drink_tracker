@@ -1,5 +1,5 @@
 {
-    "name": "drink_tracker",
+    "name": "Drink Tracker",
     "short_name": "drink_tracker",
     "start_url": ".",
     "display": "standalone",

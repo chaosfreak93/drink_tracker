@@ -1,4 +1,4 @@
-# drink_tracker
+# Drink Tracker
 
 A new Flutter project.
 
