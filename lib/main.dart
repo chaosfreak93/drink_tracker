@@ -39,16 +39,8 @@ class DrinkList extends StatefulWidget {
 class _DrinkListState extends State<DrinkList> {
   bool add = true;
 
-  void _changeFloatbuttonState() {
-    if (add) {
-      setState(() {
-        add = false;
-      });
-    } else if (!add) {
-      setState(() {
-        add = true;
-      });
-    }
+  void _addDrink() {
+    
   }
 
   @override
@@ -83,21 +75,11 @@ class _DrinkListState extends State<DrinkList> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _changeFloatbuttonState,
-        tooltip: add ? 'Add Drink' : 'Remove Drink',
-        child: add ? const Icon(Icons.add) : const Icon(Icons.remove),
+        onPressed: _addDrink,
+        tooltip: 'Add Drink',
+        child: const Icon(Icons.local_drink),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.yellow,
-        child: Row(
-          children: [
-            IconButton(icon: const Icon(Icons.local_drink_sharp), onPressed: () {}),
-            const Spacer(),
-            IconButton(icon: const Icon(Icons.local_drink_outlined), onPressed: () {})
-          ],
-        ),
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
