@@ -37,11 +37,21 @@ class DrinkList extends StatefulWidget {
 }
 
 class _DrinkListState extends State<DrinkList> {
-  bool add = true;
+  String oldDropdownValue = 'One';
 
   void _addDrink() {
     
   }
+
+  void _addUser() {
+
+  }
+
+  void _removeUser() {
+
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +62,12 @@ class _DrinkListState extends State<DrinkList> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: const Text('JGV Dattenberg'),
+        centerTitle: true,
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -70,8 +86,36 @@ class _DrinkListState extends State<DrinkList> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DropdownButton(value: oldDropdownValue, items: <String>['One', 'Two', 'Three', 'Four'].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value, 
+                    child: Text(value),
+                    );
+                  }).toList(), 
+                  onChanged: (String? newDropdownValue) {
+                    setState(() {
+                      oldDropdownValue = newDropdownValue!;
+                    });
+                  },
+                ),
+                IconButton(
+                  onPressed: _addUser, 
+                  tooltip: 'Add User', 
+                  icon: const Icon(Icons.add)
+                ),
+                IconButton(
+                  onPressed: _removeUser, 
+                  tooltip: 'Remove User', 
+                  icon: const Icon(Icons.remove)
+                ),
+              ],
+            )      
+          ]
         ),
       ),
       floatingActionButton: FloatingActionButton(
