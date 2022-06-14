@@ -37,17 +37,18 @@ class DrinkList extends StatefulWidget {
 }
 
 class _DrinkListState extends State<DrinkList> {
-  int _counter = 0;
+  bool add = true;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void _changeFloatbuttonState() {
+    if (add) {
+      setState(() {
+        add = false;
+      });
+    } else if (!add) {
+      setState(() {
+        add = true;
+      });
+    }
   }
 
   @override
@@ -78,22 +79,25 @@ class _DrinkListState extends State<DrinkList> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          children: <Widget>[],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        onPressed: _changeFloatbuttonState,
+        tooltip: add ? 'Add Drink' : 'Remove Drink',
+        child: add ? const Icon(Icons.add) : const Icon(Icons.remove),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.yellow,
+        child: Row(
+          children: [
+            IconButton(icon: const Icon(Icons.local_drink_sharp), onPressed: () {}),
+            const Spacer(),
+            IconButton(icon: const Icon(Icons.local_drink_outlined), onPressed: () {})
+          ],
+        ),
+      ),
     );
   }
 }
