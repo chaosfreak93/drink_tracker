@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'dart:io' show Platform;
+
+final List<DropdownMenuItem<String>> user = [];
+
+void main() async {
+  var db = await mongo.Db.create('mongodb://Luap:2C3oa7n358qc9X7bLu@142.132.214.152:27017/drink_tracker');
+  
+  await db.open();
+  //await db.close();
+
   runApp(const DrinkTracker());
 }
 
@@ -39,8 +49,8 @@ class DrinkList extends StatefulWidget {
 class _DrinkListState extends State<DrinkList> {
   String oldDropdownValue = 'One';
 
-  void _addDrink() {
-    
+  void _fetchUser() {
+
   }
 
   void _addUser() {
@@ -51,52 +61,26 @@ class _DrinkListState extends State<DrinkList> {
 
   }
 
-
+  void _addDrink() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    _fetchUser();
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: const Text('JGV Dattenberg'),
         centerTitle: true,
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                DropdownButton(value: oldDropdownValue, items: <String>['One', 'Two', 'Three', 'Four'].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value, 
-                    child: Text(value),
-                    );
-                  }).toList(), 
+                DropdownButton(value: oldDropdownValue, items: user, 
                   onChanged: (String? newDropdownValue) {
                     setState(() {
                       oldDropdownValue = newDropdownValue!;
@@ -114,7 +98,7 @@ class _DrinkListState extends State<DrinkList> {
                   icon: const Icon(Icons.remove)
                 ),
               ],
-            )      
+            )
           ]
         ),
       ),
@@ -122,7 +106,7 @@ class _DrinkListState extends State<DrinkList> {
         onPressed: _addDrink,
         tooltip: 'Add Drink',
         child: const Icon(Icons.local_drink),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
