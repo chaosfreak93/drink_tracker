@@ -6,7 +6,7 @@ import 'dart:io' show Platform;
 final List<DropdownMenuItem<String>> user = [];
 
 void main() async {
-  var db = await mongo.Db.create('mongodb://Luap:2C3oa7n358qc9X7bLu@142.132.214.152:27017/drink_tracker');
+  var db = await mongo.Db.create('');
   
   await db.open();
   //await db.close();
